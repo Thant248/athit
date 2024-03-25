@@ -1,0 +1,83 @@
+Started POST "/memberinvite" for 172.18.0.1 at 2024-03-25 16:35:40 +0000
+Processing by MemberInvitationController#invite as */*
+  Parameters: {"m_invite"=>{"email"=>"kcisreal2024@gmail.com", "channel_id"=>6, "workspace_id"=>1}, "member_invitation"=>{"m_invite"=>{"email"=>"kcisreal2024@gmail.com", "channel_id"=>6, "workspace_id"=>1}}}
+  [1m[36mMUser Load (74.9ms)[0m  [1m[34mSELECT `m_users`.* FROM `m_users` WHERE `m_users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:277:in `authenticate_request'
+  [1m[36mMWorkspace Load (4.0ms)[0m  [1m[34mSELECT `m_workspaces`.* FROM `m_workspaces` WHERE `m_workspaces`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:278:in `authenticate_request'
+  [1m[36mMUser Count (16.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `m_users` INNER JOIN t_user_workspaces ON t_user_workspaces.userid = m_users.id WHERE (t_user_workspaces.workspaceid = '1' and m_users.email = 'kcisreal2024@gmail.com')[0m
+  ↳ app/controllers/member_invitation_controller.rb:25:in `invite'
+  [1m[36mMChannel Load (2.2ms)[0m  [1m[34mSELECT `m_channels`.* FROM `m_channels` WHERE `m_channels`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/member_invitation_controller.rb:35:in `invite'
+  [1m[36mCACHE MWorkspace Load (0.1ms)[0m  [1m[34mSELECT `m_workspaces`.* FROM `m_workspaces` WHERE `m_workspaces`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/member_invitation_controller.rb:36:in `invite'
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/member_invite.html.erb within layouts/mailer
+  Rendered user_mailer/member_invite.html.erb within layouts/mailer (Duration: 41.4ms | Allocations: 77)
+  Rendered layout layouts/mailer.html.erb (Duration: 52.3ms | Allocations: 178)
+  Rendering layout layouts/mailer.text.erb
+  Rendering user_mailer/member_invite.text.erb within layouts/mailer
+  Rendered user_mailer/member_invite.text.erb within layouts/mailer (Duration: 2.2ms | Allocations: 68)
+  Rendered layout layouts/mailer.text.erb (Duration: 6.0ms | Allocations: 169)
+UserMailer#member_invite: processed outbound mail in 399.4ms
+Failed delivery of mail 6601a7deb012f_129409a6@01354df0f46c.mail error_class=Net::OpenTimeout error_message="execution expired"
+Date: Mon, 25 Mar 2024 16:35:42 +0000
+From: from@example.com
+To: kcisreal2024@gmail.com
+Message-ID: <6601a7deb012f_129409a6@01354df0f46c.mail>
+Subject: Member Invitation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_6601a7dea2f92_129408c9";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_6601a7dea2f92_129408c9
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi ,
+
+Welcome to the Slack App! Click on the link below to confirm your account:
+
+http://localhost:3000/confirminvitation?channelid=6&email=kcisreal2024%40gmail.com&workspaceid=1
+
+
+----==_mimepart_6601a7dea2f92_129408c9
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Slack App</h1>
+
+<p>Hi ,</p>
+
+<p>
+Welcome to the Slack App! Click on the link below to confirm your account:
+</p>
+
+<a href="http://localhost:3000/confirminvitation?channelid=6&amp;email=kcisreal2024%40gmail.com&amp;workspaceid=1">Invitate</a>
+  </body>
+</html>
+
+----==_mimepart_6601a7dea2f92_129408c9--
+
+Completed 500 Internal Server Error in 6033ms (ActiveRecord: 96.6ms | Allocations: 6421)
+
+
+  
+Net::OpenTimeout (execution expired):
+  
+app/controllers/member_invitation_controller.rb:37:in `invite'
